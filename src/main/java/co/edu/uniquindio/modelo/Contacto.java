@@ -1,4 +1,4 @@
-package co.edu.uniquindio.gestorcontactos.modelo;
+package co.edu.uniquindio.modelo;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

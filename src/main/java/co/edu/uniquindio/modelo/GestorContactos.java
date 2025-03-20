@@ -1,13 +1,18 @@
-package co.edu.uniquindio.gestorcontactos.modelo;
+package co.edu.uniquindio.modelo;
 
 import lombok.AllArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 @AllArgsConstructor
 
 public class GestorContactos {
     private final List<Contacto> contactos;
+
+    public GestorContactos() {
+        contactos = new ArrayList<>();
+    }
 
     public void agregarContacto(String nombre, String apellido, String telefono,
                                 LocalDate fechaCumpleanios, String email) throws Exception {

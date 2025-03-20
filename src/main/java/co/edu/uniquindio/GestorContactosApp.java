@@ -1,4 +1,4 @@
-package co.edu.uniquindio.gestorcontactos;
+package co.edu.uniquindio;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -10,12 +10,12 @@ public class GestorContactosApp extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        FXMLLoader loader = new FXMLLoader(GestorContactosApp.class.getResource("/inicio2.fxml"));
+        FXMLLoader loader = new FXMLLoader(GestorContactosApp.class.getResource("/principal.fxml"));
         Parent parent = loader.load();
 
         Scene scene = new Scene(parent, 1000, 360);
         stage.setScene(scene);
-        stage.setTitle("UQ Notas");
+        stage.setTitle("Gestor de Contactos");
         //stage.setResizable(false);
         stage.show();
 
