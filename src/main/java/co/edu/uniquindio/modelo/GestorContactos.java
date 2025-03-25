@@ -35,9 +35,9 @@ public class GestorContactos {
 
     }
 
-    public void eliminarContacto(String nombre, String telefono) throws Exception {
+    public void eliminarContacto(String nombre) throws Exception {
         for (int i = 0; i < contactos.size(); i++) {
-            if (contactos.get(i).getNombre().equals(nombre) || contactos.get(i).getTelefono().equals(telefono)) {
+            if (contactos.get(i).getNombre().equals(nombre)) {
                 contactos.remove(i);
             }
         }
@@ -62,6 +62,40 @@ public class GestorContactos {
 
             //Actualiza el contacto en la lista de contactos
             contactos.set(i, contactoGuardado);
+        }
+    }
+
+    public void actualizarContactos(String nombre, String apellido,
+                                    String telefono, LocalDate fechaCumpleanios, String email) throws Exception {
+
+        if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
+            throw new Exception("Todos los campos son necesarios");
+        }
+        if (fechaCumpleanios.isAfter(LocalDate.now())) {
+            throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
+
+            int posContacto = obtenerContacto(telefono);
+            if(posContacto == -1) {
+                throw new Exception("No existe un contacto con ese telefono");
+            }
+            Contacto contactoGuardado = contactos.get(posContacto);
+            contactoGuardado.setNombre(nombre);
+            contactoGuardado.setApellido(apellido);
+            contactoGuardado.setTelefono(telefono);
+            contactoGuardado.setFechaCumpleanios(LocalDate.from(fechaCumpleanios.atStartOfDay()));
+
+            contactos.set(posContacto, contactoGuardado);
+        }
+
+
+
+    private int obtenerContacto (String telefono) {
+        for (int i = 0; i < contactos.size(); i++) {
+            if (contactos.get(i).getTelefono().equals(telefono)) {
+                return i;
+            }
+        }
+        return -1;
         }
     }
 }
