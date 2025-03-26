@@ -3,6 +3,8 @@ package co.edu.uniquindio.controladores;
 import co.edu.uniquindio.modelo.Contacto;
 import co.edu.uniquindio.modelo.GestorContactos;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,10 +57,14 @@ private Contacto contacto;
     private TextField txtApellido;
 
     @FXML
-    private TextField txtCumple;
+    private DatePicker txtCumple;
 
     @FXML
     private TextField txtEmail;
+    @FXML
+    private Button btnEliminar;
+    @FXML
+    private Button btnGuardar;
 
     @FXML
     private TextField txtNombre;
@@ -68,6 +74,8 @@ private Contacto contacto;
 
     @FXML
     private Button btnFileChooser;
+
+    private ObservableList<Contacto> contactosObservable;
 
     @FXML
     void filechooser(ActionEvent event) {
@@ -80,8 +88,6 @@ private Contacto contacto;
         }
 
     }
-
-
 
         @FXML
         void initialize() {
@@ -101,6 +107,17 @@ private Contacto contacto;
         colCumple.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaCumpleanios().toString()));
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
 
+
+        //Inicializar lista observable y cargar las notas
+        contactosObservable =  FXCollections.observableArrayList();
+        cargarContanctos();
+
+    }
+
+
+    private void cargarContanctos() {
+        contactosObservable.setAll(gestorContactos.listarContactos());
+        tablaContactos.setItems(contactosObservable);
     }
 
     public PrincipalController() {
@@ -115,7 +132,7 @@ private Contacto contacto;
                 gestorContactos.eliminarContacto(contacto.getNombre());
 
                 limpiarCampos();
-                gestorContactos.actualizarContactos();
+                //gestorContactos.actualizarContactos();
                 mostrarAlerta("Contacto eliminado correctamente", Alert.AlertType.INFORMATION);
             }
             catch (Exception exception) {
@@ -140,13 +157,33 @@ private Contacto contacto;
         txtNombre.clear();
         txtApellido.clear();
         txtTelefono.clear();
-        txtCumple.clear();
+        txtCumple.setValue(null);
         txtEmail.clear();
+    }
+
+    public void actualizarContacto() {
+        contactosObservable.setAll(gestorContactos.listarContactos());
     }
 
 
     @FXML
     void guardarContacto(ActionEvent event) {
 
+        try {
+            gestorContactos.agregarContacto(
+                    txtNombre.getText(),
+                    txtApellido.getText(),
+                    txtTelefono.getText(),
+                    txtCumple.getValue(),
+                    txtEmail.getText(),
+                    imageView.getImage()
+            );
+
+            limpiarCampos();
+            actualizarContacto();
+
+        }catch (Exception e ){
+
+        }
     }
 }

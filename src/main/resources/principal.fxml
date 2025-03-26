@@ -14,6 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.DatePicker?>
 <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="464.0" prefWidth="711.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.controladores.PrincipalController">
 
     <GridPane hgap="30.0" maxWidth="600.0" style="-fx-padding: 20px" vgap="15.0">
@@ -26,7 +27,7 @@
         <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label text="Cumpleaños" GridPane.rowIndex="3" />
         <Label text="Email" GridPane.rowIndex="4" />
-        <TextField fx:id="txtCumple" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <DatePicker fx:id="txtCumple" GridPane.columnIndex="1" GridPane.rowIndex="3" />
         <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label text="Foto" GridPane.rowIndex="6" />
         <Button fx:id="btnFileChooser" mnemonicParsing="false" onAction="#filechooser" text="Elegir foto" GridPane.columnIndex="1" GridPane.rowIndex="6" />

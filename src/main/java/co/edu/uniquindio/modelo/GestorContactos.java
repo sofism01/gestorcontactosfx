@@ -1,7 +1,9 @@
 package co.edu.uniquindio.modelo;
 
+import javafx.scene.image.Image;
 import lombok.AllArgsConstructor;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,7 @@ public class GestorContactos {
     }
 
     public void agregarContacto(String nombre, String apellido, String telefono,
-                                LocalDate fechaCumpleanios, String email) throws Exception {
+                                LocalDate fechaCumpleanios, String email, Image fotoPerfil) throws Exception {
 
         if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
             throw new Exception("Todos los campos son necesarios");
@@ -24,13 +26,18 @@ public class GestorContactos {
             throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
         }
 
-        Contacto contacto = Contacto.builder()
+        if(fotoPerfil == null){
+            throw new Exception("El foto de perfil no puede ser vacía");
+        }
 
+        Contacto contacto = Contacto.builder()
                 .nombre(nombre)
                 .apellido(apellido)
                 .telefono(telefono)
+                .fotoPerfil(fotoPerfil)
                 .fechaCumpleanios(fechaCumpleanios)
                 .email(email).build();
+
         contactos.add(contacto);
 
     }
@@ -73,6 +80,7 @@ public class GestorContactos {
         }
         if (fechaCumpleanios.isAfter(LocalDate.now())) {
             throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
+        }
 
             int posContacto = obtenerContacto(telefono);
             if(posContacto == -1) {
@@ -97,5 +105,9 @@ public class GestorContactos {
         }
         return -1;
         }
-    }
-}
+
+
+    public List<Contacto> listarContactos() {
+        return contactos;
+
+}}
