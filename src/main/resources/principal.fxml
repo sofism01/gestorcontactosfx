@@ -71,9 +71,9 @@
             <columns>
                 <TableColumn fx:id="colNombre" prefWidth="62.4000244140625" text="Nombre" />
                 <TableColumn fx:id="colApellido" prefWidth="69.5999755859375" text="Apellido" />
-                <TableColumn fx:id="colTelefono" prefWidth="62.4000244140625" text="Telefóno" />
-                <TableColumn fx:id="colCumple" prefWidth="95.20001220703125" text="Cumpleaños" />
-                <TableColumn fx:id="colEmail" prefWidth="66.39998779296877" text="Email" />
+                <TableColumn fx:id="colTelefono" prefWidth="94.4000244140625" text="Telefóno" />
+                <TableColumn fx:id="colCumple" prefWidth="77.5999755859375" text="Cumpleaños" />
+                <TableColumn fx:id="colEmail" prefWidth="105.5999755859375" text="Email" />
             </columns>
          <VBox.margin>
             <Insets top="20.0" />

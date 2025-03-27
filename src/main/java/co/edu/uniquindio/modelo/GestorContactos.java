@@ -6,11 +6,15 @@ import lombok.AllArgsConstructor;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @AllArgsConstructor
 
 public class GestorContactos {
     private final List<Contacto> contactos;
+    private Set<String> telefonosRegistrados = new HashSet<>();
 
     public GestorContactos() {
         contactos = new ArrayList<>();
@@ -18,18 +22,38 @@ public class GestorContactos {
 
     public void agregarContacto(String nombre, String apellido, String telefono,
                                 LocalDate fechaCumpleanios, String email, Image fotoPerfil) throws Exception {
-
+//Validar los campos
         if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
             throw new Exception("Todos los campos son necesarios");
         }
+        if (fotoPerfil == null) {
+            throw new Exception("El foto de perfil no puede ser vacía");
+        }
+//Validar la fecha de cumple
         if (fechaCumpleanios.isAfter(LocalDate.now())) {
             throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
         }
 
-        if(fotoPerfil == null){
-            throw new Exception("El foto de perfil no puede ser vacía");
+//Validar el numero de telefono
+        if (telefono.length() != 10) {
+            throw new Exception("El número de teléfono debe tener exactamente 10 dígitos");
         }
 
+        for (char c : telefono.toCharArray()) {
+            if (!Character.isDigit(c)) {
+                throw new Exception("El número de teléfono solo debe contener dígitos");
+            }
+        }
+        //Validar el email
+        if (!email.contains("@") || email.indexOf("@") == 0 || email.lastIndexOf(".")
+                < email.indexOf("@") + 2 || email.endsWith(".")) {
+            throw new Exception("El email no tiene un formato válido");
+        }
+
+        // Validar que el teléfono no esté repetido
+        if (telefonosRegistrados.contains(telefono)) {
+            throw new Exception("El número de teléfono ya está registrado");
+        }
         Contacto contacto = Contacto.builder()
                 .nombre(nombre)
                 .apellido(apellido)
@@ -37,7 +61,7 @@ public class GestorContactos {
                 .fotoPerfil(fotoPerfil)
                 .fechaCumpleanios(fechaCumpleanios)
                 .email(email).build();
-
+        telefonosRegistrados.add(telefono);
         contactos.add(contacto);
 
     }

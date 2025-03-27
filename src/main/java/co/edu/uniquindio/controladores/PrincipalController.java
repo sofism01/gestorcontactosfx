@@ -80,6 +80,10 @@ private Contacto contacto;
     @FXML
     private TextField txtTelefono;
 
+
+    @FXML
+    private TextField txtBusqueda;
+
     @FXML
     private Button btnFileChooser;
 
@@ -136,6 +140,7 @@ private Contacto contacto;
                 txtTelefono.setText(contactoSeleccionado.getTelefono());
                 txtCumple.setValue(contactoSeleccionado.getFechaCumpleanios());
                 txtEmail.setText(contactoSeleccionado.getEmail());
+                imageView.setImage(contactoSeleccionado.getFotoPerfil());
             }
 
         });
@@ -189,6 +194,7 @@ private Contacto contacto;
         txtTelefono.clear();
         txtCumple.setValue(null);
         txtEmail.clear();
+        imageView.setImage(null);
     }
 
     public void actualizarContacto() {
@@ -245,6 +251,18 @@ mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
 
     @FXML
     void filtrarContacto(ActionEvent event) {
+        String filtro = txtCategoria.getValue();
+        String busqueda = txtBusqueda.getText().trim();
 
+        ObservableList<Contacto> filtrados = contactosObservable.filtered(contacto -> {
+            if (filtro.equals("Nombre")) {
+                return contacto.getNombre().toLowerCase().contains(busqueda.toLowerCase());
+            } else if (filtro.equals("Telefono")) {
+                return contacto.getTelefono().contains(busqueda);
+            }
+            return false;
+        });
+
+        tablaContactos.setItems(filtrados);
     }
 }

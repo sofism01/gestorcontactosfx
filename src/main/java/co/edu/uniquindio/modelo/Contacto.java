@@ -21,3 +21,5 @@ public class Contacto {
     private String email;
     private Image fotoPerfil;
 }
+
+
