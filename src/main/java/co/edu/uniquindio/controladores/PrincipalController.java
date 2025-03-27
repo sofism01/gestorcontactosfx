@@ -204,9 +204,10 @@ private Contacto contacto;
 
             limpiarCampos();
             actualizarContacto();
+            mostrarAlerta("Contacto guardado correctamente", Alert.AlertType.INFORMATION);
 
         }catch (Exception e ){
-
+mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
