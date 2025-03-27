@@ -73,7 +73,7 @@ public class GestorContactos {
         }
     }
 
-    public void actualizarContactos(String nombre, String apellido,
+    public void buscarContactoPorTelefono(String nombre, String apellido,
                                     String telefono, LocalDate fechaCumpleanios, String email) throws Exception {
 
         if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
@@ -83,7 +83,7 @@ public class GestorContactos {
             throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
         }
 
-            int posContacto = obtenerContacto(telefono);
+            int posContacto = obtenerContactoPorTelefono(telefono);
             if(posContacto == -1) {
                 throw new Exception("No existe un contacto con ese telefono");
             }
@@ -98,9 +98,34 @@ public class GestorContactos {
             contactos.set(posContacto, contactoGuardado);
         }
 
+    public void buscarContactoPorNombre(String nombre, String apellido,
+                                          String telefono, LocalDate fechaCumpleanios, String email) throws Exception {
+
+        if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
+            throw new Exception("Todos los campos son necesarios");
+        }
+        if (fechaCumpleanios.isAfter(LocalDate.now())) {
+            throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
+        }
+
+        int posContacto = obtenerContactoPorNombre(nombre);
+        if(posContacto == -1) {
+            throw new Exception("No existe un contacto con ese telefono");
+        }
+        Contacto contactoGuardado = contactos.get(posContacto);
+        contactoGuardado.setNombre(nombre);
+        contactoGuardado.setApellido(apellido);
+        contactoGuardado.setTelefono(telefono);
+        contactoGuardado.setFechaCumpleanios(LocalDate.from(fechaCumpleanios.atStartOfDay()));
+        contactoGuardado.setEmail(email);
 
 
-    private int obtenerContacto (String telefono) {
+        contactos.set(posContacto, contactoGuardado);
+    }
+
+
+
+    private int obtenerContactoPorTelefono (String telefono) {
         for (int i = 0; i < contactos.size(); i++) {
             if (contactos.get(i).getTelefono().equals(telefono)) {
                 return 1;
@@ -109,8 +134,27 @@ public class GestorContactos {
         return -1;
         }
 
+    private int obtenerContactoPorNombre (String nombre) {
+        for (int i = 0; i < contactos.size(); i++) {
+            if (contactos.get(i).getNombre().equals(nombre)) {
+                return 1;
+            }
+        }
+        return -1;
+    }
+
 
     public List<Contacto> listarContactos() {
         return contactos;
 
-}}
+}
+    public ArrayList<String> listarCategorias() {
+        ArrayList<String> categorias = new ArrayList<>();
+        categorias.add("Nombre");
+        categorias.add("Telefono");
+
+
+        return categorias;
+    }
+
+}

@@ -31,6 +31,10 @@ private Contacto contacto;
         @FXML
         private URL location;
 
+
+    @FXML
+    private ComboBox<String> txtCategoria;
+
     @FXML
     private TableView<Contacto> tablaContactos;
 
@@ -113,6 +117,8 @@ private Contacto contacto;
         colCumple.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaCumpleanios().toString()));
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
 
+        //Cargar categorias en el ComboBox
+        txtCategoria.setItems( FXCollections.observableList(gestorContactos.listarCategorias()) );
 
         //Inicializar lista observable y cargar contactos
         contactosObservable =  FXCollections.observableArrayList();

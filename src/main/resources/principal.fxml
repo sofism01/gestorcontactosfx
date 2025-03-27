@@ -62,7 +62,7 @@
                <Insets top="20.0" />
             </HBox.margin>
          </Button>
-            <ComboBox prefWidth="150.0" promptText="Elija una opción" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <ComboBox fx:id="txtCategoria" prefWidth="150.0" promptText="Elija una opción" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <HBox.margin>
                <Insets top="20.0" />
             </HBox.margin></ComboBox>
