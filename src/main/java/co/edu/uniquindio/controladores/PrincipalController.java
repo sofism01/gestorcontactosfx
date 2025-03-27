@@ -52,6 +52,11 @@ private Contacto contacto;
     @FXML
     private ImageView imageView;
 
+    @FXML
+    private Button btnEditar;
+
+    @FXML
+    private Button btnEliminar;
 
     @FXML
     private TextField txtApellido;
@@ -61,8 +66,7 @@ private Contacto contacto;
 
     @FXML
     private TextField txtEmail;
-    @FXML
-    private Button btnEliminar;
+
     @FXML
     private Button btnGuardar;
 
@@ -77,6 +81,8 @@ private Contacto contacto;
 
     private ObservableList<Contacto> contactosObservable;
 
+    private Contacto contactoSeleccionado; //Nota seleccionada de la tabla
+
     @FXML
     void filechooser(ActionEvent event) {
         FileChooser fc = new FileChooser();
@@ -89,10 +95,7 @@ private Contacto contacto;
 
     }
 
-        @FXML
-        void initialize() {
 
-        }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -111,6 +114,21 @@ private Contacto contacto;
         //Inicializar lista observable y cargar las notas
         contactosObservable =  FXCollections.observableArrayList();
         cargarContanctos();
+
+        //Evento click en la tabla
+        tablaContactos.setOnMouseClicked(e -> {
+            //Obtener la nota seleccionada
+            contactoSeleccionado = tablaContactos.getSelectionModel().getSelectedItem();
+
+            if(contactoSeleccionado != null){
+                txtNombre.setText(contactoSeleccionado.getNombre());
+                txtApellido.setText(contactoSeleccionado.getApellido());
+                txtTelefono.setText(contactoSeleccionado.getTelefono());
+                txtCumple.setValue(contactoSeleccionado.getFechaCumpleanios());
+                txtEmail.setText(contactoSeleccionado.getEmail());
+            }
+
+        });
 
     }
 
@@ -132,7 +150,7 @@ private Contacto contacto;
                 gestorContactos.eliminarContacto(contacto.getNombre());
 
                 limpiarCampos();
-                //gestorContactos.actualizarContactos();
+                actualizarContacto();
                 mostrarAlerta("Contacto eliminado correctamente", Alert.AlertType.INFORMATION);
             }
             catch (Exception exception) {
@@ -184,6 +202,30 @@ private Contacto contacto;
 
         }catch (Exception e ){
 
+        }
+    }
+
+
+    @FXML
+    void editarContacto(ActionEvent event) {
+        if(contactoSeleccionado != null) {
+            try {
+                gestorContactos.editarContacto(
+                        txtNombre.getText(),
+                        txtApellido.getText(),
+                        txtTelefono.getText(),
+                        txtCumple.getValue(),
+                        txtEmail.getText()
+                );
+
+                limpiarCampos();
+                actualizarContacto();
+                mostrarAlerta("Nota actualizada correctamente", Alert.AlertType.INFORMATION);
+            } catch (Exception ex) {
+                mostrarAlerta(ex.getMessage(), Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarAlerta("Debe seleccionar una nota de la tabla", Alert.AlertType.WARNING);
         }
     }
 }

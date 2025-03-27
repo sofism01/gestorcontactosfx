@@ -66,6 +66,8 @@ public class GestorContactos {
             contactoGuardado.setApellido(apellido);
             contactoGuardado.setTelefono(telefono);
             contactoGuardado.setFechaCumpleanios(fechaCumpleanios);
+            contactoGuardado.setEmail(email);
+
 
             //Actualiza el contacto en la lista de contactos
             contactos.set(i, contactoGuardado);
@@ -91,6 +93,8 @@ public class GestorContactos {
             contactoGuardado.setApellido(apellido);
             contactoGuardado.setTelefono(telefono);
             contactoGuardado.setFechaCumpleanios(LocalDate.from(fechaCumpleanios.atStartOfDay()));
+            contactoGuardado.setEmail(email);
+
 
             contactos.set(posContacto, contactoGuardado);
         }
@@ -100,7 +104,7 @@ public class GestorContactos {
     private int obtenerContacto (String telefono) {
         for (int i = 0; i < contactos.size(); i++) {
             if (contactos.get(i).getTelefono().equals(telefono)) {
-                return i;
+                return 1;
             }
         }
         return -1;
