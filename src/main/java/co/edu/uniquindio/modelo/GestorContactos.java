@@ -42,13 +42,12 @@ public class GestorContactos {
 
     }
 
-    public void eliminarContacto(String nombre) throws Exception {
+    public void eliminarContacto(String nombre){
         for (int i = 0; i < contactos.size(); i++) {
             if (contactos.get(i).getNombre().equals(nombre)) {
                 contactos.remove(i);
             }
         }
-        throw new Exception("No se encontro un contacto con ese nombre o telefono");
     }
 
     public void editarContacto(String nombre, String apellido, String telefono,

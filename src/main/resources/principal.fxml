@@ -54,6 +54,7 @@
     <VBox>
         <HBox>
             <TextField prefHeight="26.0" prefWidth="228.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarContacto" prefHeight="26.0" prefWidth="62.0" text="Buscar" />
             <ComboBox prefWidth="150.0" promptText="Elija una opción" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         </HBox>
         <TableView fx:id="tablaContactos" prefHeight="204.0" prefWidth="357.0" GridPane.columnIndex="2" GridPane.rowIndex="8">

@@ -79,15 +79,18 @@ private Contacto contacto;
     @FXML
     private Button btnFileChooser;
 
+    @FXML
+    private Button btnBuscar;
+
     private ObservableList<Contacto> contactosObservable;
 
-    private Contacto contactoSeleccionado; //Nota seleccionada de la tabla
+    private Contacto contactoSeleccionado; //contacto seleccionado de la tabla
 
     @FXML
     void filechooser(ActionEvent event) {
         FileChooser fc = new FileChooser();
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivo", "*.jpg", "*.png"));
-        File file = fc.showOpenDialog(null); // Cambié a showOpenDialog para seleccionar UNA imagen
+        File file = fc.showOpenDialog(null);
         if (file != null) {
             Image image = new Image(file.toURI().toString()); // Cargar imagen desde la ruta seleccionada
             imageView.setImage(image); // Mostrar imagen en el ImageView
@@ -111,13 +114,13 @@ private Contacto contacto;
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
 
 
-        //Inicializar lista observable y cargar las notas
+        //Inicializar lista observable y cargar contactos
         contactosObservable =  FXCollections.observableArrayList();
         cargarContanctos();
 
         //Evento click en la tabla
         tablaContactos.setOnMouseClicked(e -> {
-            //Obtener la nota seleccionada
+            //Obtener contacto seleccionado
             contactoSeleccionado = tablaContactos.getSelectionModel().getSelectedItem();
 
             if(contactoSeleccionado != null){
@@ -145,6 +148,8 @@ private Contacto contacto;
 
     @FXML
     void eliminarContacto(ActionEvent event) throws Exception {
+        // Obtener el contacto seleccionado de la tabla
+        Contacto contacto = tablaContactos.getSelectionModel().getSelectedItem();
         if(contacto != null){
             try{
                 gestorContactos.eliminarContacto(contacto.getNombre());
@@ -220,12 +225,18 @@ private Contacto contacto;
 
                 limpiarCampos();
                 actualizarContacto();
-                mostrarAlerta("Nota actualizada correctamente", Alert.AlertType.INFORMATION);
+                mostrarAlerta("Contacto actualizado correctamente", Alert.AlertType.INFORMATION);
             } catch (Exception ex) {
                 mostrarAlerta(ex.getMessage(), Alert.AlertType.ERROR);
             }
         }else{
-            mostrarAlerta("Debe seleccionar una nota de la tabla", Alert.AlertType.WARNING);
+            mostrarAlerta("Debe seleccionar un contacto de la tabla", Alert.AlertType.WARNING);
         }
+    }
+
+
+    @FXML
+    void buscarContacto(ActionEvent event) {
+
     }
 }
