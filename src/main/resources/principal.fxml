@@ -53,11 +53,11 @@
 
     <VBox>
         <HBox>
-            <TextField prefHeight="26.0" prefWidth="228.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextField fx:id="txtBusqueda" prefHeight="26.0" prefWidth="228.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <HBox.margin>
                <Insets top="20.0" />
             </HBox.margin></TextField>
-         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#buscarContacto" prefHeight="26.0" prefWidth="62.0" text="Buscar">
+         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#filtrarContacto" prefHeight="26.0" prefWidth="62.0" text="Buscar">
             <HBox.margin>
                <Insets top="20.0" />
             </HBox.margin>

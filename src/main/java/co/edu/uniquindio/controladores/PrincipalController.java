@@ -117,6 +117,7 @@ private Contacto contacto;
         colCumple.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getFechaCumpleanios().toString()));
         colEmail.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getEmail()));
 
+
         //Cargar categorias en el ComboBox
         txtCategoria.setItems( FXCollections.observableList(gestorContactos.listarCategorias()) );
 
@@ -243,7 +244,7 @@ mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
 
 
     @FXML
-    void buscarContacto(ActionEvent event) {
+    void filtrarContacto(ActionEvent event) {
 
     }
 }
