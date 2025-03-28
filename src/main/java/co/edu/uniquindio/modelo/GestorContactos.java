@@ -54,6 +54,8 @@ public class GestorContactos {
         if (telefonosRegistrados.contains(telefono)) {
             throw new Exception("El número de teléfono ya está registrado");
         }
+
+
         Contacto contacto = Contacto.builder()
                 .nombre(nombre)
                 .apellido(apellido)
@@ -95,76 +97,6 @@ public class GestorContactos {
             //Actualiza el contacto en la lista de contactos
             contactos.set(i, contactoGuardado);
         }
-    }
-
-    public void buscarContactoPorTelefono(String nombre, String apellido,
-                                    String telefono, LocalDate fechaCumpleanios, String email) throws Exception {
-
-        if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
-            throw new Exception("Todos los campos son necesarios");
-        }
-        if (fechaCumpleanios.isAfter(LocalDate.now())) {
-            throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
-        }
-
-            int posContacto = obtenerContactoPorTelefono(telefono);
-            if(posContacto == -1) {
-                throw new Exception("No existe un contacto con ese telefono");
-            }
-            Contacto contactoGuardado = contactos.get(posContacto);
-            contactoGuardado.setNombre(nombre);
-            contactoGuardado.setApellido(apellido);
-            contactoGuardado.setTelefono(telefono);
-            contactoGuardado.setFechaCumpleanios(LocalDate.from(fechaCumpleanios.atStartOfDay()));
-            contactoGuardado.setEmail(email);
-
-
-            contactos.set(posContacto, contactoGuardado);
-        }
-
-    public void buscarContactoPorNombre(String nombre, String apellido,
-                                          String telefono, LocalDate fechaCumpleanios, String email) throws Exception {
-
-        if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
-            throw new Exception("Todos los campos son necesarios");
-        }
-        if (fechaCumpleanios.isAfter(LocalDate.now())) {
-            throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
-        }
-
-        int posContacto = obtenerContactoPorNombre(nombre);
-        if(posContacto == -1) {
-            throw new Exception("No existe un contacto con ese telefono");
-        }
-        Contacto contactoGuardado = contactos.get(posContacto);
-        contactoGuardado.setNombre(nombre);
-        contactoGuardado.setApellido(apellido);
-        contactoGuardado.setTelefono(telefono);
-        contactoGuardado.setFechaCumpleanios(LocalDate.from(fechaCumpleanios.atStartOfDay()));
-        contactoGuardado.setEmail(email);
-
-
-        contactos.set(posContacto, contactoGuardado);
-    }
-
-
-
-    private int obtenerContactoPorTelefono (String telefono) {
-        for (int i = 0; i < contactos.size(); i++) {
-            if (contactos.get(i).getTelefono().equals(telefono)) {
-                return 1;
-            }
-        }
-        return -1;
-        }
-
-    private int obtenerContactoPorNombre (String nombre) {
-        for (int i = 0; i < contactos.size(); i++) {
-            if (contactos.get(i).getNombre().equals(nombre)) {
-                return 1;
-            }
-        }
-        return -1;
     }
 
 

@@ -22,14 +22,14 @@ import java.util.List;
 
 
 public class PrincipalController implements Initializable {
-private final GestorContactos gestorContactos;
-private Contacto contacto;
+    private final GestorContactos gestorContactos;
+    private Contacto contacto;
 
-        @FXML
-        private ResourceBundle resources;
+    @FXML
+    private ResourceBundle resources;
 
-        @FXML
-        private URL location;
+    @FXML
+    private URL location;
 
 
     @FXML
@@ -107,7 +107,6 @@ private Contacto contacto;
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -123,10 +122,10 @@ private Contacto contacto;
 
 
         //Cargar categorias en el ComboBox
-        txtCategoria.setItems( FXCollections.observableList(gestorContactos.listarCategorias()) );
+        txtCategoria.setItems(FXCollections.observableList(gestorContactos.listarCategorias()));
 
         //Inicializar lista observable y cargar contactos
-        contactosObservable =  FXCollections.observableArrayList();
+        contactosObservable = FXCollections.observableArrayList();
         cargarContanctos();
 
         //Evento click en la tabla
@@ -134,7 +133,7 @@ private Contacto contacto;
             //Obtener contacto seleccionado
             contactoSeleccionado = tablaContactos.getSelectionModel().getSelectedItem();
 
-            if(contactoSeleccionado != null){
+            if (contactoSeleccionado != null) {
                 txtNombre.setText(contactoSeleccionado.getNombre());
                 txtApellido.setText(contactoSeleccionado.getApellido());
                 txtTelefono.setText(contactoSeleccionado.getTelefono());
@@ -162,20 +161,18 @@ private Contacto contacto;
     void eliminarContacto(ActionEvent event) throws Exception {
         // Obtener el contacto seleccionado de la tabla
         Contacto contacto = tablaContactos.getSelectionModel().getSelectedItem();
-        if(contacto != null){
-            try{
+        if (contacto != null) {
+            try {
                 gestorContactos.eliminarContacto(contacto.getNombre());
 
                 limpiarCampos();
                 actualizarContacto();
                 mostrarAlerta("Contacto eliminado correctamente", Alert.AlertType.INFORMATION);
-            }
-            catch (Exception exception) {
+            } catch (Exception exception) {
                 mostrarAlerta(exception.getMessage(), Alert.AlertType.ERROR);
             }
 
-            }
-        else{
+        } else {
             mostrarAlerta("Debe seleccionar un contacto de la tabla", Alert.AlertType.WARNING);
         }
     }
@@ -219,15 +216,15 @@ private Contacto contacto;
             actualizarContacto();
             mostrarAlerta("Contacto guardado correctamente", Alert.AlertType.INFORMATION);
 
-        }catch (Exception e ){
-mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
         }
     }
 
 
     @FXML
     void editarContacto(ActionEvent event) {
-        if(contactoSeleccionado != null) {
+        if (contactoSeleccionado != null) {
             try {
                 gestorContactos.editarContacto(
                         txtNombre.getText(),
@@ -243,7 +240,7 @@ mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
             } catch (Exception ex) {
                 mostrarAlerta(ex.getMessage(), Alert.AlertType.ERROR);
             }
-        }else{
+        } else {
             mostrarAlerta("Debe seleccionar un contacto de la tabla", Alert.AlertType.WARNING);
         }
     }
@@ -263,6 +260,36 @@ mostrarAlerta(e.getMessage(), Alert.AlertType.ERROR);
             return false;
         });
 
+        tablaContactos.setItems(filtrados);
+// Si hay coincidencias, mostrar una alerta con todos los contactos encontrados
+        if (!filtrados.isEmpty()) {
+            StringBuilder mensaje = new StringBuilder("✩ Contactos Encontrados:\n");
+
+            for (Contacto contacto : filtrados) {
+                mensaje.append("\n Nombre: ").append(contacto.getNombre())
+                        .append("\n⭑ Apellido: ").append(contacto.getApellido())
+                        .append("\n⭑ Teléfono: ").append(contacto.getTelefono())
+                        .append("\n⭑ Cumpleaños: ").append(contacto.getFechaCumpleanios())
+                        .append("\n⭑ Email: ").append(contacto.getEmail())
+                        .append("\n-----------------------");
+            }
+
+            // Mostrar una alerta con la información de todos los contactos encontrados
+            Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+            alerta.setTitle("Contactos Encontrados");
+            alerta.setHeaderText("Se encontraron " + filtrados.size() + " contactos:");
+            alerta.setContentText(mensaje.toString());
+            alerta.showAndWait();
+        } else {
+            // Si no se encontró ningún contacto, mostrar una alerta de error
+            Alert alerta = new Alert(Alert.AlertType.ERROR);
+            alerta.setTitle("Error");
+            alerta.setHeaderText("No se encontró ningún contacto");
+            alerta.setContentText("No hay coincidencias con: " + busqueda);
+            alerta.showAndWait();
+        }
+
+        // Actualizar la tabla con los resultados filtrados
         tablaContactos.setItems(filtrados);
     }
 }
