@@ -69,11 +69,11 @@
         </HBox>
         <TableView fx:id="tablaContactos" prefHeight="204.0" prefWidth="362.0" style="-fx-border-color: #666666;" GridPane.columnIndex="2" GridPane.rowIndex="8">
             <columns>
-                <TableColumn fx:id="colNombre" prefWidth="62.4000244140625" style="-fx-background-color: #92C5FC;" text="Nombre" />
-                <TableColumn fx:id="colApellido" prefWidth="69.5999755859375" style="-fx-background-color: #92C5FC;" text="Apellido" />
-                <TableColumn fx:id="colTelefono" prefWidth="94.4000244140625" style="-fx-background-color: #92C5FC;" text="Telefóno" />
-                <TableColumn fx:id="colCumple" prefWidth="77.5999755859375" style="-fx-background-color: #92C5FC;" text="Cumpleaños" />
-                <TableColumn fx:id="colEmail" prefWidth="88.7999267578125" style="-fx-background-color: #92C5FC;" text="Email" />
+                <TableColumn fx:id="colNombre" prefWidth="62.4000244140625" text="Nombre" />
+                <TableColumn fx:id="colApellido" prefWidth="69.5999755859375" text="Apellido" />
+                <TableColumn fx:id="colTelefono" prefWidth="94.4000244140625" text="Telefóno" />
+                <TableColumn fx:id="colCumple" prefWidth="77.5999755859375" text="Cumpleaños" />
+                <TableColumn fx:id="colEmail" prefWidth="88.7999267578125" text="Email" />
             </columns>
          <VBox.margin>
             <Insets top="20.0" />

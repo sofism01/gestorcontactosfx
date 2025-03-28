@@ -2,6 +2,7 @@ package co.edu.uniquindio.controladores;
 
 import co.edu.uniquindio.modelo.Contacto;
 import co.edu.uniquindio.modelo.GestorContactos;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -249,6 +250,12 @@ public class PrincipalController implements Initializable {
     @FXML
     void filtrarContacto(ActionEvent event) {
         String filtro = txtCategoria.getValue();
+
+        if(filtro == null){
+            mostrarAlerta("Debe seleccionar una opción", Alert.AlertType.ERROR);
+            return;
+        }
+
         String busqueda = txtBusqueda.getText().trim();
 
         ObservableList<Contacto> filtrados = contactosObservable.filtered(contacto -> {
