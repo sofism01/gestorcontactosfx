@@ -78,24 +78,30 @@ public class GestorContactos {
 
     public void editarContacto(String nombre, String apellido, String telefono,
                                LocalDate fechaCumpleanios, String email) throws Exception {
+
+        if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
+            throw new Exception("Todos los campos son necesarios");
+        }
+        if (fechaCumpleanios.isAfter(LocalDate.now())) {
+            throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
+        }
+
         for (int i = 0; i < contactos.size(); i++) {
-            if (nombre.isEmpty() || apellido.isEmpty() || telefono.isEmpty() || email.isEmpty()) {
-                throw new Exception("Todos los campos son necesarios");
+
+            if(contactos.get(i).getTelefono().equals(telefono)) {
+
+                Contacto contactoGuardado = contactos.get(i);
+                contactoGuardado.setNombre(nombre);
+                contactoGuardado.setApellido(apellido);
+                contactoGuardado.setTelefono(telefono);
+                contactoGuardado.setFechaCumpleanios(fechaCumpleanios);
+                contactoGuardado.setEmail(email);
+
+
+                //Actualiza el contacto en la lista de contactos
+                contactos.set(i, contactoGuardado);
+                break;
             }
-            if (fechaCumpleanios.isAfter(LocalDate.now())) {
-                throw new Exception("La fecha de cumpleaños no puede ser en el futuro");
-            }
-
-            Contacto contactoGuardado = contactos.get(i);
-            contactoGuardado.setNombre(nombre);
-            contactoGuardado.setApellido(apellido);
-            contactoGuardado.setTelefono(telefono);
-            contactoGuardado.setFechaCumpleanios(fechaCumpleanios);
-            contactoGuardado.setEmail(email);
-
-
-            //Actualiza el contacto en la lista de contactos
-            contactos.set(i, contactoGuardado);
         }
     }
 

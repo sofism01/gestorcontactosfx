@@ -20,17 +20,17 @@
     <GridPane hgap="30.0" maxWidth="600.0" style="-fx-padding: 20px" vgap="15.0">
 
         <Label text="Nombre" />
-        <TextField fx:id="txtNombre" GridPane.columnIndex="1" />
+        <TextField fx:id="txtNombre" style="-fx-border-color: #666666;" GridPane.columnIndex="1" />
         <Label text="Apellido" GridPane.rowIndex="1" />
         <Label text="Telefóno" GridPane.rowIndex="2" />
-        <TextField fx:id="txtApellido" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-        <TextField fx:id="txtTelefono" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+        <TextField fx:id="txtApellido" style="-fx-border-color: #666666;" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+        <TextField fx:id="txtTelefono" style="-fx-border-color: #666666;" GridPane.columnIndex="1" GridPane.rowIndex="2" />
         <Label text="Cumpleaños" GridPane.rowIndex="3" />
         <Label text="Email" GridPane.rowIndex="4" />
-        <DatePicker fx:id="txtCumple" prefHeight="26.0" prefWidth="189.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-        <TextField fx:id="txtEmail" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+        <DatePicker fx:id="txtCumple" prefHeight="26.0" prefWidth="189.0" style="-fx-background-color: #666666;" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+        <TextField fx:id="txtEmail" style="-fx-border-color: #666666;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
         <Label text="Foto" GridPane.rowIndex="6" />
-        <Button fx:id="btnFileChooser" mnemonicParsing="false" onAction="#filechooser" text="Elegir foto" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+        <Button fx:id="btnFileChooser" mnemonicParsing="false" onAction="#filechooser" style="-fx-background-color: #92C5FC; -fx-border-color: #000000;" text="Elegir foto" GridPane.columnIndex="1" GridPane.rowIndex="6" />
       <ImageView fx:id="imageView" fitHeight="126.0" fitWidth="186.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.rowIndex="9" />
       <columnConstraints>
          <ColumnConstraints />
@@ -51,29 +51,29 @@
 
     </GridPane>
 
-    <VBox>
+    <VBox prefHeight="464.0" prefWidth="394.0">
         <HBox>
-            <TextField fx:id="txtBusqueda" prefHeight="26.0" prefWidth="228.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <TextField fx:id="txtBusqueda" prefHeight="26.0" prefWidth="228.0" style="-fx-border-color: #666666;" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <HBox.margin>
                <Insets top="20.0" />
             </HBox.margin></TextField>
-         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#filtrarContacto" prefHeight="26.0" prefWidth="62.0" text="Buscar">
+         <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#filtrarContacto" prefHeight="26.0" prefWidth="74.0" style="-fx-background-color: #92C5FC; -fx-border-color: #000000;" text="Buscar">
             <HBox.margin>
                <Insets top="20.0" />
             </HBox.margin>
          </Button>
-            <ComboBox fx:id="txtCategoria" prefWidth="150.0" promptText="Elija una opción" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <ComboBox fx:id="txtCategoria" prefWidth="150.0" promptText="Elija una opción" style="-fx-background-color: #CDCDCD;" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <HBox.margin>
                <Insets top="20.0" />
             </HBox.margin></ComboBox>
         </HBox>
-        <TableView fx:id="tablaContactos" prefHeight="204.0" prefWidth="357.0" GridPane.columnIndex="2" GridPane.rowIndex="8">
+        <TableView fx:id="tablaContactos" prefHeight="204.0" prefWidth="362.0" style="-fx-border-color: #666666;" GridPane.columnIndex="2" GridPane.rowIndex="8">
             <columns>
-                <TableColumn fx:id="colNombre" prefWidth="62.4000244140625" text="Nombre" />
-                <TableColumn fx:id="colApellido" prefWidth="69.5999755859375" text="Apellido" />
-                <TableColumn fx:id="colTelefono" prefWidth="94.4000244140625" text="Telefóno" />
-                <TableColumn fx:id="colCumple" prefWidth="77.5999755859375" text="Cumpleaños" />
-                <TableColumn fx:id="colEmail" prefWidth="105.5999755859375" text="Email" />
+                <TableColumn fx:id="colNombre" prefWidth="62.4000244140625" style="-fx-background-color: #92C5FC;" text="Nombre" />
+                <TableColumn fx:id="colApellido" prefWidth="69.5999755859375" style="-fx-background-color: #92C5FC;" text="Apellido" />
+                <TableColumn fx:id="colTelefono" prefWidth="94.4000244140625" style="-fx-background-color: #92C5FC;" text="Telefóno" />
+                <TableColumn fx:id="colCumple" prefWidth="77.5999755859375" style="-fx-background-color: #92C5FC;" text="Cumpleaños" />
+                <TableColumn fx:id="colEmail" prefWidth="88.7999267578125" style="-fx-background-color: #92C5FC;" text="Email" />
             </columns>
          <VBox.margin>
             <Insets top="20.0" />
@@ -81,17 +81,17 @@
         </TableView>
       <HBox prefHeight="162.0" prefWidth="378.0">
          <children>
-              <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarContacto" text="Guardar">
+              <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#guardarContacto" style="-fx-background-color: #45AC42; -fx-border-color: #000000;" text="Guardar">
                <HBox.margin>
                   <Insets left="45.0" right="20.0" top="50.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editarContacto" prefHeight="26.0" prefWidth="51.0" text="Editar">
+            <Button fx:id="btnEditar" mnemonicParsing="false" onAction="#editarContacto" prefHeight="26.0" prefWidth="51.0" style="-fx-background-color: #FFE900; -fx-border-color: #000000;" text="Editar">
                <HBox.margin>
                   <Insets bottom="20.0" left="40.0" right="20.0" top="50.0" />
                </HBox.margin>
             </Button>
-              <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarContacto" text="Eliminar">
+              <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarContacto" style="-fx-background-color: #ed2e38; -fx-border-color: #000000;" text="Eliminar">
                <HBox.margin>
                   <Insets left="50.0" right="20.0" top="50.0" />
                </HBox.margin>

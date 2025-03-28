@@ -13,7 +13,7 @@ public class GestorContactosApp extends Application {
         FXMLLoader loader = new FXMLLoader(GestorContactosApp.class.getResource("/principal.fxml"));
         Parent parent = loader.load();
 
-        Scene scene = new Scene(parent, 1000, 360);
+        Scene scene = new Scene(parent, 900, 450);
         stage.setScene(scene);
         stage.setTitle("Gestor de Contactos");
         //stage.setResizable(false);
